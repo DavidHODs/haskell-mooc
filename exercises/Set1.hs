@@ -21,8 +21,8 @@ import Mooc.Todo
 -- Ex 1: define variables one and two. They should have type Int and
 -- values 1 and 2, respectively.
 
-var1 = 1 :: Integer
-var2 = 2 :: Integer
+one = 1 :: Int
+two = 2 :: Int
 
 ------------------------------------------------------------------------------
 -- Ex 2: define the function double of type Integer->Integer. Double
