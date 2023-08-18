@@ -101,7 +101,7 @@ isPalindrome str =
 palindromify :: String -> String
 palindromify s
     | isPalindrome s = s
-    | otherwise = last
+    | otherwise = palindromify last
     where 
         first = tail s 
         last = init first
