@@ -135,8 +135,8 @@ safeDiv x y =
 greet :: String -> Maybe String -> String
 greet first last = 
     case last of 
-        Just lastName -> "Hello, first " ++ lastName
-        Nothing -> "Hello, first"
+        Just lastName -> "Hello, " ++ first ++ " " ++ lastName ++ "!"
+        Nothing -> "Hello, " ++ first ++ "!"
 
 
 ------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ greet first last =
 
 safeIndex :: [a] -> Int -> Maybe a
 safeIndex xs i =
-     if length xs < i then Nothing else Just result
+     if i < length xs then Nothing else Just result
      where result = xs !! i
 
 
@@ -169,7 +169,7 @@ safeIndex xs i =
 eitherDiv :: Integer -> Integer -> Either String Integer
 eitherDiv x y = 
     case y of 
-        0 -> Left "you cant divide by zero "
+        0 -> Left ("" ++ show x ++ "/0")
         _ -> Right result 
         where result = x `div` y
 
