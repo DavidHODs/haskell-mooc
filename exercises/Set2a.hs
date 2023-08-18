@@ -154,7 +154,7 @@ greet first last =
 
 safeIndex :: [a] -> Int -> Maybe a
 safeIndex xs i =
-     if i < length xs then Nothing else Just result
+     if (i >= length xs) || (i < 0) then Nothing else Just result
      where result = xs !! i
 
 
@@ -190,6 +190,6 @@ eitherDiv x y =
 
 addEithers :: Either String Int -> Either String Int -> Either String Int
 addEithers (Right a) (Right b) = Right (a + b)
+addEithers (Left a) (Right b) = Left a
 addEithers (Right a) (Left b) = Left b
 addEithers (Left a) (Left b) = Left a
-addEithers (Left _) (Right _) = Left "input something"
