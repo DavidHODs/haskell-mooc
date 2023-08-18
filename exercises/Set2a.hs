@@ -152,7 +152,10 @@ greet first last =
 --   safeIndex ["a","b","c"] (-1)  ==> Nothing
 
 safeIndex :: [a] -> Int -> Maybe a
-safeIndex xs i = todo
+safeIndex xs i =
+     if length xs < i then Nothing else Just result
+     where result = xs !! i
+
 
 ------------------------------------------------------------------------------
 -- Ex 10: another variant of safe division. This time you should use
@@ -163,7 +166,12 @@ safeIndex xs i = todo
 --   eitherDiv 4 0   ==> Left "4/0"
 
 eitherDiv :: Integer -> Integer -> Either String Integer
-eitherDiv x y = todo
+eitherDiv x y = 
+    case y of 
+        0 -> Left "you cant divide by zero "
+        _ -> Right result 
+        where result = x `div` y
+
 
 ------------------------------------------------------------------------------
 -- Ex 11: implement the function addEithers, which combines two values of type
@@ -180,4 +188,7 @@ eitherDiv x y = todo
 --   addEithers (Left "boom") (Left "fail") ==> Left "boom"
 
 addEithers :: Either String Int -> Either String Int -> Either String Int
-addEithers a b = todo
+addEithers (Right a) (Right b) = Right (a + b)
+addEithers (Right a) (Left b) = Left b
+addEithers (Left a) (Left b) = Left a
+addEithers (Left _) (Right _) = Left "input something"
