@@ -106,8 +106,18 @@ leftpad str val = case val of
 -- * you'll probably need a recursive helper function
 
 countdown :: Integer -> String
-countdown = todo
+countdown n = 
+    "Ready! " ++ res ++ "... " ++ "Liftoff!"
+    where res = countHelper n
+    
 
+countHelper :: Integer -> String
+countHelper count
+    | count <= 0 = ""
+    | count == 1 = "1"
+    | otherwise = show count ++ "... " ++ countHelper (count - 1)
+
+    
 ------------------------------------------------------------------------------
 -- Ex 6: implement the function smallestDivisor that returns the
 -- smallest number (greater than 1) that divides the given number evenly.

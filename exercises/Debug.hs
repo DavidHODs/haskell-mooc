@@ -56,5 +56,14 @@ leftpad str val = case val of
                 spaces = replicate (val - stringLength) ' '
                 stringLength = length str
 
+countdown :: Integer -> String
+countdown n = 
+    "Ready! " ++ res ++ "... " ++ "Liftoff!"
+    where res = countHelper n
+    
 
-            
+countHelper :: Integer -> String
+countHelper count
+    | count <= 0 = ""
+    | count == 1 = "1"
+    | otherwise = show count ++ "... " ++ countHelper (count - 1)
