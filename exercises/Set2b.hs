@@ -16,11 +16,11 @@ import Data.List
 -- Hint! pattern matching is your friend.
 
 binomial :: Integer -> Integer -> Integer
-binomial n k
-    | k < 0 || k > n = 0
-    | k == 0 = 1
-    | n == 0 = 0
-    | otherwise = binomial (n - 1) k + binomial (n - 1) (k - 1)
+binomial n k = 
+    case (n, k) of 
+        (n', 0) -> 1
+        (0, k') -> 0
+        _ -> binomial (n - 1) k + binomial (n - 1) (k - 1)
 
 ------------------------------------------------------------------------------
 -- Ex 2: implement the odd factorial function. Odd factorial is like
@@ -30,7 +30,9 @@ binomial n k
 --   oddFactorial 7 ==> 7*5*3*1 ==> 105
 --   oddFactorial 6 ==> 5*3*1 ==> 15
 oddFactorial :: Int -> Int
-oddFactorial n = if n > 1 then n * oddFactorial (n - 2) else n
+oddFactorial n = if n > 1 then oddn * oddFactorial (n - 2) else 1
+    where
+        oddn = if even n then n - 1 else n
 
 
 -- Ex 3: implement the Euclidean Algorithm for finding the greatest
