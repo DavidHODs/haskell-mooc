@@ -16,7 +16,7 @@ import Data.List
 -- Hint! pattern matching is your friend.
 
 binomial :: Integer -> Integer -> Integer
-binomial n k 
+binomial n k
     | k < 0 || k > n = 0
     | k == 0 = 1
     | n == 0 = 0
@@ -30,7 +30,7 @@ binomial n k
 --   oddFactorial 7 ==> 7*5*3*1 ==> 105
 --   oddFactorial 6 ==> 5*3*1 ==> 15
 oddFactorial :: Int -> Int
-oddFactorial n = if n > 1 then n * oddFactorial (n - 2) else n 
+oddFactorial n = if n > 1 then n * oddFactorial (n - 2) else n
 
 
 -- Ex 3: implement the Euclidean Algorithm for finding the greatest
@@ -62,11 +62,11 @@ oddFactorial n = if n > 1 then n * oddFactorial (n - 2) else n
 -- * https://en.wikipedia.org/wiki/Euclidean_algorithm
 
 myGcd :: Integer -> Integer -> Integer
-myGcd a b = case (a, b) of 
+myGcd a b = case (a, b) of
     (a', 0) -> a'
     (0, b') -> b'
     (a', b')
-        | a' >= b' -> myGcd (a' - b') b' 
+        | a' >= b' -> myGcd (a' - b') b'
         | otherwise -> myGcd a' (b' - a')
 
 
@@ -84,7 +84,7 @@ myGcd a b = case (a, b) of
 -- * you can compute the length of a string with the length function
 
 leftpad :: String -> Int -> String
-leftpad str val = case val of 
+leftpad str val = case val of
     n
         | stringLength >= n -> str
         | otherwise -> spaces ++ str
@@ -106,10 +106,10 @@ leftpad str val = case val of
 -- * you'll probably need a recursive helper function
 
 countdown :: Integer -> String
-countdown n = 
+countdown n =
     "Ready! " ++ res ++ "... " ++ "Liftoff!"
     where res = countHelper n
-    
+
 
 countHelper :: Integer -> String
 countHelper count
@@ -117,7 +117,7 @@ countHelper count
     | count == 1 = "1"
     | otherwise = show count ++ "... " ++ countHelper (count - 1)
 
-    
+
 ------------------------------------------------------------------------------
 -- Ex 6: implement the function smallestDivisor that returns the
 -- smallest number (greater than 1) that divides the given number evenly.
@@ -134,7 +134,11 @@ countHelper count
 -- Hint: remember the mod function!
 
 smallestDivisor :: Integer -> Integer
-smallestDivisor = todo
+smallestDivisor n = divisor 2
+    where divisor n'
+            | (n' * n') > n = n
+            | n `mod` n' == 0 = n'
+            | otherwise = divisor(n' + 1)
 
 ------------------------------------------------------------------------------
 -- Ex 7: implement a function isPrime that checks if the given number
@@ -143,7 +147,10 @@ smallestDivisor = todo
 -- Ps. 0 and 1 are not prime numbers
 
 isPrime :: Integer -> Bool
-isPrime = todo
+isPrime n
+    | n <= 1 = False
+    | smallestDivisor n  == n = True
+    | otherwise = False
 
 ------------------------------------------------------------------------------
 -- Ex 8: implement a function biggestPrimeAtMost that returns the
@@ -158,4 +165,6 @@ isPrime = todo
 --   biggestPrimeAtMost 10 ==> 7
 
 biggestPrimeAtMost :: Integer -> Integer
-biggestPrimeAtMost = todo
+biggestPrimeAtMost n
+    | n < 2 = n
+    | otherwise = if isPrime n then n else biggestPrimeAtMost (n-1)
