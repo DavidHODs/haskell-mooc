@@ -16,7 +16,11 @@ import Data.List
 -- Hint! pattern matching is your friend.
 
 binomial :: Integer -> Integer -> Integer
-binomial = todo
+binomial n k 
+    | k < 0 || k > n = 0
+    | k == 0 = 1
+    | n == 0 = 0
+    | otherwise = binomial (n - 1) k + binomial (n - 1) (k - 1)
 
 ------------------------------------------------------------------------------
 -- Ex 2: implement the odd factorial function. Odd factorial is like
@@ -25,11 +29,10 @@ binomial = todo
 -- Examples:
 --   oddFactorial 7 ==> 7*5*3*1 ==> 105
 --   oddFactorial 6 ==> 5*3*1 ==> 15
+oddFactorial :: Int -> Int
+oddFactorial n = if n > 1 then n * oddFactorial (n - 2) else n 
 
-oddFactorial :: Integer -> Integer
-oddFactorial = todo
 
-------------------------------------------------------------------------------
 -- Ex 3: implement the Euclidean Algorithm for finding the greatest
 -- common divisor:
 --
@@ -38,13 +41,13 @@ oddFactorial = todo
 -- * if not, subtract the smaller number from the larger one
 -- * replace the larger number with this new number
 -- * repeat
---
+
 -- For example,
 --   myGcd 9 12 ==> 3
 -- In this case, the algorithm proceeds like this
---
+
 --   a      b
---
+
 --   9      12
 --   9      (12-9)
 --   9      3
@@ -59,7 +62,13 @@ oddFactorial = todo
 -- * https://en.wikipedia.org/wiki/Euclidean_algorithm
 
 myGcd :: Integer -> Integer -> Integer
-myGcd = todo
+myGcd a b = case (a, b) of 
+    (a', 0) -> a'
+    (0, b') -> b'
+    (a', b')
+        | a' >= b' -> myGcd (a' - b') b' 
+        | otherwise -> myGcd a' (b' - a')
+
 
 ------------------------------------------------------------------------------
 -- Ex 4: Implement the function leftpad which adds space characters
@@ -75,7 +84,13 @@ myGcd = todo
 -- * you can compute the length of a string with the length function
 
 leftpad :: String -> Int -> String
-leftpad = todo
+leftpad str val = case val of 
+    n
+        | stringLength >= n -> str
+        | otherwise -> spaces ++ str
+            where
+                spaces = replicate (val - stringLength) ' '
+                stringLength = length str
 
 ------------------------------------------------------------------------------
 -- Ex 5: let's make a countdown for a rocket! Given a number, you

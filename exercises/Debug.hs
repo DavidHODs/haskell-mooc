@@ -38,3 +38,23 @@ eitherDiv x y =
         _ -> Right result
         
         where result = x `div` y
+
+euclideanAlgo :: Integer -> Integer -> Integer
+euclideanAlgo a b = case (a, b) of 
+    (a', 0) -> a'
+    (0, b') -> b'
+    (a', b')
+        | a' >= b' -> euclideanAlgo (a' - b') b' 
+        | otherwise -> euclideanAlgo a' (b' - a')
+
+leftpad :: String -> Int -> String
+leftpad str val = case val of 
+    n
+        | stringLength >= n -> str
+        | otherwise -> spaces ++ str
+            where
+                spaces = replicate (val - stringLength) ' '
+                stringLength = length str
+
+
+            
